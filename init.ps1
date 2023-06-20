@@ -1,7 +1,7 @@
 # todo get the alpine linux from outside microsoft store
 
 if (-Not (Test-Path "Alpine.zip")) {
-	irm "https://github.com/yuk7/AlpineWSL/releases/download/3.16.0-0/Alpine.zip" -outfile Alpine.zip
+	irm "https://github.com/phanirithvij/ansible-wininit/releases/download/v0.0.1-alpha/Alpine.zip" -outfile Alpine.zip
 	Expand-Archive Alpine.zip
 	if (-Not (Test-Path "Alpine.exe")) {
 		mv Alpine\Alpine.exe .
