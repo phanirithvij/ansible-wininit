@@ -1,0 +1,55 @@
+   0 ./scripts/init.sh 
+   1 apk add libyaml
+   2 apk add yaml
+   3 ansible --version
+   4 source ~/.bashrc
+   5 ansible --version
+   6 apk add yaml-dev
+   7 ansible --version
+   8 apk del yaml-dev
+   9 apk del yaml
+  10 ansible --version
+  11 python3 -c 'import _yaml'
+  12 apk add yaml-dev
+  13 pipx uninstall ansible
+  14 pipx install --include-deps ansible
+  15 python3 -c 'import _yaml'
+  16 ansible --version
+  17 python3 -m pip install pyyaml
+  18 python3 -c 'import _yaml'
+  19 apk add py3-yaml
+  20 python3 -c 'import _yaml'
+  21 ansible --version
+  22 pipx uninstall ansible
+  23 pipx install --include-deps ansible
+  24 ansible --version
+  25 pipx install --include-deps   --system-site-packages ansible --pip-args --no-binary --no-cache
+  26 pipx install --include-deps --system-site-packages ansible --pip-args "--no-binary --no-cache"
+  27 pipx uninstall ansible
+  28 pipx install --include-deps --system-site-packages ansible --pip-args "--no-binary --no-cache"
+  29 cat     /root/.local/pipx/logs/cmd_2023-06-20_20.24.56_pip_errors.log
+  30 pipx install --include-deps --system-site-packages ansible --pip-args "--no-binary --no-cache-dir"
+  31 pipx install --include-deps --system-site-packages ansible --pip-args "--no-binary :all: --no-cache-dir"
+  32 pipx install --verbose --include-deps --system-site-packages ansible --pip-args "--no-binary :all: --no-cache-dir"
+  33 pipx install --verbose --include-deps --system-site-packages ansible --pip-args "--no-binary :all: --no-cache-dir -vvv"
+  34 pip install --help
+  35 pipx install --verbose --include-deps --system-site-packages ansible --pip-args "--no-binary :all: --no-cache-dir -vvv"
+  36 apk add musl
+  37 which gcc
+  38 apk add gcc
+  39 pipx install --verbose --include-deps --system-site-packages ansible --pip-args "--no-binary :all: --no-cache-dir -vvv"
+  40 pipx install --verbose --include-deps --system-site-packages ansible --pip-args "--no-binary :all: --no-cache-dir -vvv --compile"
+  41 apk add python3-dev gcc musl py3-yaml yaml-dev
+  42 pipx install --verbose --include-deps --system-site-packages ansible --pip-args "--no-binary :all: --no-cache-dir -vvv --compile"
+  43 apk del py3-yaml
+  44 apk add python3-dev gcc musl yaml-dev
+  45 apk del yaml
+  46 apk add python3-dev gcc musl yaml yaml-dev
+  47 pipx install --verbose --include-deps --no-cache ansible --pip-args "--no-binary :all: --no-cache-dir -vvv --compile"
+  48 pipx install --verbose --include-deps ansible --pip-args "--no-binary :all: --no-cache-dir -vvv --compile"
+  49 apk add ansible
+  50 which ansible
+  51 ansible --version
+  52 /usr/bin/ansible --version
+  53 history
+  54 history > ansible_build_alpine_libyaml_src.txt

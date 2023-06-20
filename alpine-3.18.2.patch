@@ -1,0 +1,26 @@
+diff --git a/src_arm64/Makefile b/src_arm64/Makefile
+index d570b54..01fda53 100644
+--- a/src_arm64/Makefile
++++ b/src_arm64/Makefile
+@@ -3,7 +3,7 @@ LNCR_EXE=Alpine.exe
+ 
+ DLR=curl
+ DLR_FLAGS=-L
+-BASE_URL=https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/aarch64/alpine-minirootfs-3.16.0-aarch64.tar.gz
++BASE_URL=https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/aarch64/alpine-minirootfs-3.18.2-aarch64.tar.gz
+ LNCR_ZIP_URL=https://github.com/yuk7/wsldl/releases/download/22020900/icons_arm64.zip
+ LNCR_ZIP_EXE=Alpine.exe
+ 
+diff --git a/src_x64/Makefile b/src_x64/Makefile
+index 183b302..ca2dde0 100644
+--- a/src_x64/Makefile
++++ b/src_x64/Makefile
+@@ -3,7 +3,7 @@ LNCR_EXE=Alpine.exe
+ 
+ DLR=curl
+ DLR_FLAGS=-L
+-BASE_URL=https://dl-cdn.alpinelinux.org/alpine/v3.16/releases/x86_64/alpine-minirootfs-3.16.0-x86_64.tar.gz
++BASE_URL=https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/x86_64/alpine-minirootfs-3.18.2-x86_64.tar.gz
+ LNCR_ZIP_URL=https://github.com/yuk7/wsldl/releases/download/22020900/icons.zip
+ LNCR_ZIP_EXE=Alpine.exe
+ 
