@@ -18,3 +18,17 @@ Bootstrap ansible on windows with wsl with a minimal alpine linux setup
 
 - For creating the init/backup/restore scripts I used these resources
 	- https://github.com/agowa/WSL-DistroLauncher-Alpine/issues/2
+
+### Frequently used Commands
+
+```
+killall sshd; sshd -r
+
+powershell -File .\destroy.ps1
+sudo powershell -File .\init.ps1
+
+powershell -File D:\ansible-wininit\destroy.ps1
+sudo powershell -File D:\ansible-wininit\init.ps1
+
+.\Alpine.exe backup --vhdxgz
+```

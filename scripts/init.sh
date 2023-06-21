@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+rm -f /etc/motd
+
 # If shell is ash, change it
 if [[ $SHELL == *"/ash" ]]; then
 	# Set root passwd
@@ -43,6 +45,7 @@ ansible --version
 apk add openssh tmux py3-pip
 ssh-keygen -A
 chmod go-w /var/empty
+cp ./scripts/sshd_config /etc/ssh/sshd_config
 
 pip install pipx pip-autoremove
 pipx install tmuxp
@@ -52,4 +55,4 @@ pip uninstall -y pip-autoremove
 rm -rf ~/.cache/pip
 apk del py3-pip
 
-echo "tmuxp load -d ./scripts/ssh_t.yml" >> ~/.bashrc
+echo "tmuxp load -d ${PWD}/scripts/ssh_t.yml" >> ~/.bashrc
