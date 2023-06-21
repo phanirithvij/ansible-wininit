@@ -32,6 +32,8 @@ sudo powershell -File D:\ansible-wininit\init.ps1
 
 .\Alpine.exe run "./scripts/wsl_ipv4.sh"
 
+dos2unix.exe **/** && dos2unix.exe ** && dos2unix.exe .**
+
 # https://github.com/yuk7/wsldl#how-to-import
 
 .\Alpine.exe backup --vhdxgz

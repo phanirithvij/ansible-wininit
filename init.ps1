@@ -55,4 +55,5 @@ if (!$error) {
     echo y | .\Alpine.exe | Out-Null
     .\Alpine.exe run "./scripts/info.sh"
     .\Alpine.exe run "./scripts/init.sh"
+    . .\scripts\copy_keys.ps1
 }
