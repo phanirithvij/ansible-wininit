@@ -44,10 +44,11 @@ apk add openssh tmux py3-pip
 ssh-keygen -A
 chmod go-w /var/empty
 
-pip install pipx
+pip install pipx pip-autoremove
 pipx install tmuxp
 
-pip uninstall pipx
+pip-autoremove -y pipx
+pip uninstall -y pip-autoremove
 rm -rf ~/.cache/pip
 apk del py3-pip
 
