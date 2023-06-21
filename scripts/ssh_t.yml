@@ -1,0 +1,5 @@
+session_name: sshd
+windows:
+  - window_name: sshd
+    panes:
+      - $(which sshd)
