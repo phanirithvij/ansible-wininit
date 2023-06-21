@@ -8,6 +8,7 @@ echo -en "$pswd\n$pswd" | passwd
 apk update
 apk add bash shadow
 echo $pswd | chsh -s /bin/bash root
+echo
 apk del shadow
 echo "export PATH=\$PATH:~/.local/bin" > ~/.bashrc
 source ~/.bashrc

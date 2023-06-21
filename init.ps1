@@ -23,4 +23,5 @@ catch {	"Error occured" }
 if (!$error) {
 	.\Alpine.exe
 	.\Alpine.exe run "./scripts/info.sh"
+	.\Alpine.exe run "./scripts/init.sh"
 }
