@@ -30,5 +30,9 @@ sudo powershell -File .\init.ps1
 powershell -File D:\ansible-wininit\destroy.ps1
 sudo powershell -File D:\ansible-wininit\init.ps1
 
+.\Alpine.exe run "./scripts/wsl_ipv4.sh"
+
+# https://github.com/yuk7/wsldl#how-to-import
+
 .\Alpine.exe backup --vhdxgz
 ```
