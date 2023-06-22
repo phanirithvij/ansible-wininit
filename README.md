@@ -3,38 +3,26 @@
 
 ## Purpose
 
-Bootstrap ansible on windows with wsl with a minimal alpine linux setup
+Bootstrap ansible on windows
 
 ## TODO
 
-- [x] Get an alpine wsl distro which is available for installation from outside microsoft store
-	- As of now using `agowa/WSL-DistroLauncher-Alpine` which can only be installed from microsoft store
-	- [ ] See https://wsldl-pg.github.io/docs/Using-wsldl/#distros
-		- [x] https://github.com/yuk7/AlpineWSL
-			- Seems kind of abandoned and is still at alpine 3.16
-			- I locally patched to update alpine to the latest version
+- [ ] Each of the implementations live in thier own branches?
+	- [ ] This is bad, own directories will allow making an install script than own branches
+	- [ ] Todo readme per sub dir and remove all the branches
+- [ ] Implement ps1 scripts for various ways of boostrapping ansible on windows
+	- [ ] msys2
+	- [ ] wsl2
+		- [ ] wsl1 (worth?)
+	- [ ] vagrant
+- [ ] A script which allows choosing what to setup like an ansible_bootstrap.ps1
+	- [ ] that script should have a cli option `--no-auto-select`
+	      which by default would detect and select in the above order.
+	- [ ] cli arg like -u msys2/wsl2/wsl/vagrant
+	      or prompt the user
 
 ## Notes
 
-- For creating the init/backup/restore scripts I used these resources
-	- https://github.com/agowa/WSL-DistroLauncher-Alpine/issues/2
+- [ ] ...
 
 ### Frequently used Commands
-
-```
-killall sshd; sshd -r
-
-powershell -File .\destroy.ps1
-sudo powershell -File .\init.ps1
-
-powershell -File D:\ansible-wininit\destroy.ps1
-sudo powershell -File D:\ansible-wininit\init.ps1
-
-.\Alpine.exe run "./scripts/wsl_ipv4.sh"
-
-dos2unix.exe **/** && dos2unix.exe ** && dos2unix.exe .**
-
-# https://github.com/yuk7/wsldl#how-to-import
-
-.\Alpine.exe backup --vhdxgz
-```
