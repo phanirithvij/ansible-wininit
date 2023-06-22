@@ -49,4 +49,5 @@ rm -rf ~/.cache/pip
 apk del py3-pip
 
 echo "tmuxp load -d ${PWD}/scripts/ssh_t.yml" >> ~/.bashrc
+# run sshd with tmux
 source ~/.bashrc
