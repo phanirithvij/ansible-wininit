@@ -7,9 +7,6 @@ Bootstrap ansible on windows
 
 ## TODO
 
-- [ ] Each of the implementations live in thier own branches?
-	- [ ] This is bad, own directories will allow making an install script than own branches
-	- [ ] Todo readme per sub dir and remove all the branches
 - [ ] Implement ps1 scripts for various ways of boostrapping ansible on windows
 	- [ ] msys2
 	- [ ] wsl2
