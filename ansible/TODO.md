@@ -1,14 +1,48 @@
+- [ ] For loop over go manual dependecies, check if exists if not install (for idempotence)
+- [ ] scoop, choco, winget (for win host)
+- [ ] topgrade
+- [ ] tmux
+	- plugins, config etc.
 - [ ] navi
+	- [ ] cheats from repo(s) based on machine/profile
+- [ ] zoxide
+	- [ ] restore db based on machine/profile
+- [ ] fish
+- [ ] starshtip
+	- [ ] conf based on machine/profile
+- [ ] alacritty
+	- [ ] conf based on machine/profile
+	- [ ] multiple alternatives (yadm alts?)
 - [ ] lf
 - [ ] micro
+- [ ] espanso (for desktop machine/profiles)
 - [ ] dotfiles restore
-	- [ ] profiles feature investigate
+	- [ ] Decide on what to use
+	- [ ] profiles feature investigate (https://github.com/topics/dotfiles-manager)
+	- https://github.com/IsaccBarker/Greatness#disclaimer-1
 		- yadm (lang:bash)
 		- RichiH/vcsh (lang:bash)
 		- dotdrop (lang:py3)
 		- anishathalye/dotbot (lang:py3)
 		- thoughtbot/rcm (lang:perl)
-		- chezmoi (lang:go)
+		- chezmoi (lang:go) ( ✓ )
 		- stow (lang:perl)
+		- kazhala/dotbare (lang:bash)
 		- SuperCuber/dotter (lang:rust)
+			- https://github.com/SuperCuber/dotter/wiki/Setup-and-Configuration
+		- oknozor/toml-bombadil (lang:rust) ( ✓ )
+		- IsaccBarker/Greatness (lang:rust)
+		- CodelyTV/dotly (lang:bash)
+		- ellipsis/ellipsis (lang:bash)
+		- bevry/dorothy (lang:bash)
 - [ ] etc.
+- [ ] https://github.com/ivaquero/oxidizer
+	- Installs rust tools like fd, sd, rg etc. replacing find, sed, grep
+	- ps -> procs
+	- tree -> dduan/tre
+
+- Others dotfiles
+	- renemarc/dotfiles
+
+- cargo remote etc.
+- tversteeg/emplace (syncronized packages installed?)
