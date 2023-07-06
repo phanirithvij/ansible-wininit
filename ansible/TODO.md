@@ -1,0 +1,14 @@
+- [ ] navi
+- [ ] lf
+- [ ] micro
+- [ ] dotfiles restore
+	- [ ] profiles feature investigate
+		- yadm (lang:bash)
+		- RichiH/vcsh (lang:bash)
+		- dotdrop (lang:py3)
+		- anishathalye/dotbot (lang:py3)
+		- thoughtbot/rcm (lang:perl)
+		- chezmoi (lang:go)
+		- stow (lang:perl)
+		- SuperCuber/dotter (lang:rust)
+- [ ] etc.
