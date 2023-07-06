@@ -1,31 +1,46 @@
 # Check if the current user has administrative privileges
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")
-if (-not $isAdmin) {
+if ($isAdmin) {
+	# Check if WSL is installed
+	$wslFeature = Get-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online -ErrorAction SilentlyContinue
+	if ($wslFeature -eq $null) {
+	    # WSL feature not installed, enable it
+	    $enableResult = Enable-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online
+	    # Check if a restart is needed
+	    if ($enableResult.RestartNeeded) {
+	        Write-Output "WSL feature has been enabled. Please restart your computer for the changes to take effect."
+	        exit
+	    }
+	    else {
+	        Write-Output "WSL feature has been enabled. Updating to wsl version 2."
+	        wsl --set-default-version 2
+	    }
+	}
+	else {
+	    Write-Output "WSL is already installed. Updating to wsl version 2."
+	    wsl --set-default-version 2
+	}
+} else {
+	# Assume wsl is installed
+	$wslverinfo = (wsl --list --verbose)
+	$NoDefaultDistro = ($wslverinfo | Where {$_.Replace("`0","") -match 'DEFAULT_DISTRO_NOT_FOUND'})
+	if ($NoDefaultDistro -eq $null) {
+		# Some distro exists
+		$NoAlpineDistro = ($wslverinfo | Where {$_.Replace("`0","") -match 'Alpine'})
+		if ($NoAlpineDistro -eq $null) {
+			echo "Alpine not found"
+		} else {
+			echo "Alpine found"
+			exit
+		}
+	} else {
+		# DEFAULT_DISTRO_NOT_FOUND
+		echo "Alpine not found"
+	}
     $scriptPath = [System.Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
     # Relaunch the script with administrative privileges
     Start-Process -FilePath $scriptPath -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"cd '$pwd'; & '$PSCommandPath';`"" -Verb RunAs
     exit
-}
-
-# Check if WSL is installed
-$wslFeature = Get-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online -ErrorAction SilentlyContinue
-
-if ($wslFeature -eq $null) {
-    # WSL feature not installed, enable it
-    $enableResult = Enable-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online
-    # Check if a restart is needed
-    if ($enableResult.RestartNeeded) {
-        Write-Output "WSL feature has been enabled. Please restart your computer for the changes to take effect."
-        exit
-    }
-    else {
-        Write-Output "WSL feature has been enabled. Updating to wsl version 2."
-        wsl --set-default-version 2
-    }
-}
-else {
-    Write-Output "WSL is already installed. Updating to wsl version 2."
-    wsl --set-default-version 2
 }
 
 # get the alpine linux from outside microsoft store

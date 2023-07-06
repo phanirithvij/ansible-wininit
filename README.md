@@ -11,6 +11,8 @@ Bootstrap ansible on windows
 	- [ ] msys2
 	- [ ] wsl2
 		- [ ] wsl1 (worth?)
+		- [ ] Alpine
+		- [ ] Ubuntu (As others might've already have ubuntu wsl installed)
 	- [ ] vagrant
 - [ ] A script which allows choosing what to setup like an ansible_bootstrap.ps1
 	- [ ] that script should have a cli option `--no-auto-select`
@@ -20,6 +22,11 @@ Bootstrap ansible on windows
 
 ## Notes
 
-- [ ] ...
+- shell history on ubuntu wsl
+    7  apt install openssh-server
+   10  mkdir /run/sshd
+   11  sshd -r
+   16  apt install net-tools
+   17  netstat -tuplen
 
 ### Frequently used Commands

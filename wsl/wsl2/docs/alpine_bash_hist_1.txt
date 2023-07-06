@@ -1,0 +1,66 @@
+    1  echo $0
+    2  eval echo 3
+    3  exec echo 3
+    7  eval $(navi)
+    8  eval $(navi widget bash)
+    9  navi
+   10  _navi_widget
+   11  bash
+   12  cat .ash_history
+   13  pushd /mnt/c; cmd.exe /K "D:\Software\Scoop\apps\cmder\current\vendor\init.bat /f"; popd
+   14  pushd /mnt/c; cmd.exe /K "D:\Software\Scoop\apps\cmder\current\vendor\init.bat /f"; popd
+   15  pushd /mnt/c; pwsh.exe -noexit -Command ". \$env:CMDER_ROOT\config\user_profile.ps1"; popd
+   16  pushd /mnt/c; pwsh.exe -noexit -Command ". \$env:CMDER_ROOT\config\user_profilex.ps1"; popd
+   17  pushd /mnt/c; pwsh.exe -noexit -Command '. $env:CMDER_ROOT\config\user_profilex.ps1'; popd
+   18  pushd /mnt/c; pwsh.exe -noexit -Command '. $env:CMDER_ROOT\config\user_profile.ps1'; popd
+   19  pushd /mnt/c; pwsh.exe -noexit -Command ". $env:CMDER_ROOT\config\user_profile.ps1"; popd
+   20  pushd /mnt/c; pwsh.exe -noexit -Command '. $env:CMDER_ROOT\config\user_profile.ps1'; popd
+   21  pwsh.exe -noexit -Command '. $env:CMDER_ROOT\config\user_profile.ps1'
+   22  apk add navi
+   23  navi
+   24  which fzf
+   25  navi
+   26  navi fn welcome
+   27  navi --help
+   28  which navi
+   29  navi --finder "fzf"
+   30  apk del navi
+   31  apk add rust
+   32  apk del rust
+   33  apk add navi
+   34  navi info config-example
+   35  navi info config-path
+   36  navi info config-example > "$(navi info config-path)"
+   37  lf $(navi info config-path)
+   38  navi
+   39  lf $(navi info config-path)
+   40  navi
+   41  navi
+   42  navi widget bash
+   43  source $(navi widget bash)
+   44  eval $(navi widget bash)
+   45  bash
+   46  eval $(navi widget bash)
+   47  bash
+   48  eval $(navi widget bash)
+   49  source $(navi widget bash)
+   50  which env
+   51  echo $SHELL
+   52  clear
+   53  navi widget bash | less
+   54  echo $0
+   55  navi widget bash
+   56  source $(navi widget bash)
+   57  source echo 3
+   58  source env
+   59  source env sh
+   60   source "#! /usr/bin/env bash"
+   61  chsh
+   62  apk add shadow
+   63  chsh
+   64  chsh
+   65  navi widget bash
+   66  navi widget bash
+   67  source $(navi widget bash)
+   68  bash
+   69  history > docs/alpine_bash_hist_1.txt

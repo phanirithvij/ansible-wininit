@@ -1,0 +1,76 @@
+   0 sshd -r
+   1 apk add openssh
+   2 sshd -r
+   3 ssh-keygen -A
+   4 sshd -r
+   5 chmod go-w /var/empty
+   6 sshd -r
+   7 netstat -tuplen
+   8 l
+   9 ls
+  10 pwd
+  11 history
+  12 tmux
+  13 apk update
+  14 apk add tmux
+  15 tmux
+  16 where ls
+  17 pwd
+  18 ls
+  19 ls
+  20 ls /
+  21 ls /mnt
+  22 ls /mnt/c
+  23 cd /mnt/c
+  24 ls
+  25 exit
+  26 l
+  27 tmux
+  28 lf
+  29 apk update
+  30 apk add lf
+  31 lf
+  32 mkdir -p ~/.config/lf
+  33 echo set hidden! > ~/.config/lf/lfrc
+  34 lf
+  35 which sshd
+  36 which runit
+  37 flatpak
+  38 ls
+  39 lf
+  40 ps aux
+  41 lf
+  42 arch
+  43 lf
+  44 cat /etc/os-release
+  45 uname
+  46 uname -a
+  47 cd
+  48 tmux
+  49 ls
+  50 lf
+  51 start .
+  52 explorer .
+  53 echo $PATH
+  54 /mnt/c/Windows/explorer.exe .
+  55 echo $PATH
+  56 tmux
+  57 echo $PATH
+  58 lf
+  59 tmux
+  60 tmuxp
+  61 apk add tmuxp
+  62 apk add py3-pip
+  63 pip install -U pipx
+  64 pipx list
+  65 pipx install tmuxp
+  66 echo "export PATH=$PATH:~/.local/bin" >> ~/.profile
+  67 tmux
+  68 echo "export PATH=\$PATH:~/.local/bin" >> ~/.profile
+  69 tmux
+  70 tmux a
+  71 tmux
+  72 history
+  73 cd /mnt/d/ansible-wininit/wsl/wsl2/
+  74 history
+  75 history > docs/alpine_ash_hist_1.txt

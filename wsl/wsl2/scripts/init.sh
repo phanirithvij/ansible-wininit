@@ -31,17 +31,30 @@ EOF
 # Also ansible is too slow
 #apk add python3 py3-pip
 #pip install pipx
-#pipx install --include-deps ansible
+#pipx install --system-site-packages --include-deps ansible
 apk add ansible
-which ansible
-ansible --version
+echo $(which ansible) --version
+$(which ansible) --version
+mkdir -p /etc/ansible
+cat > /etc/ansible/ansible.cfg << EOF
+[defaults]
+# Use the YAML callback plugin.
+stdout_callback = yaml
+# Use the stdout_callback when running ad-hoc commands.
+bin_ansible_callbacks = True
+log_path = ~/.cache/ansible-playbook.log
+# https://stackoverflow.com/a/68496361
+[ssh_connection]
+pipelining = True
+ssh_args = -o ControlMaster=auto -o ControlPersist=1200
+EOF
 
 # setup ssh
 apk add openssh tmux py3-pip
 ssh-keygen -A
 chmod go-w /var/empty
 cp ./scripts/sshd_config /etc/ssh/sshd_config
-mkdir ~/.ssh
+mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 
 pip install tmuxp
@@ -51,3 +64,20 @@ apk del py3-pip
 echo "tmuxp load -d ${PWD}/scripts/ssh_t.yml" >> ~/.bashrc
 # run sshd with tmux
 source ~/.bashrc
+
+# Optional tools which are to be made into ansible notebooks or roles or whatnot
+
+# lf setup (TODO copy config file from github yadm/chezmoi/dotdrop/...)
+apk add lf
+mkdir -p ~/.config/lf
+echo "set hidden!" > ~/.config/lf/lfrc
+
+# https://github.com/denisidoro/navi/blob/master/docs/config_file.md
+# navi setup (default config comes with skim, zsh, overwrite it with the example one which is fzf, bash)
+apk add fzf navi
+navi info config-example > $(navi info config-path)
+echo "navi widget bash > /tmp/navi_widget.sh" >> ~/.bashrc
+echo "source /tmp/navi_widget.sh" >> ~/.bashrc
+
+# TODO fish shell
+#apk add fish # this is auto installing navi, lf, fzf fish plugins
