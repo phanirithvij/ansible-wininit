@@ -1,0 +1,4 @@
+- [ ] leftwm
+- [ ] hetbteftswm
+- [ ] qtile
+- [ ] awesomewm

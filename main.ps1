@@ -5,3 +5,4 @@ fsutil behavior query symlinkEvaluation | foreach-object {
 	$argsF["$($src[0])2$($dest.ToUpper()[0])"]="$(If ($status -eq "enabled.") {1} Else {0}) "
 }
 echo $argsF
+

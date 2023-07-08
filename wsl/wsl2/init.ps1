@@ -71,4 +71,5 @@ if (!$error) {
     .\Alpine.exe run "./scripts/info.sh"
     .\Alpine.exe run "./scripts/init.sh"
     . .\scripts\copy_keys.ps1
+    wsl --set-default Alpine
 }
