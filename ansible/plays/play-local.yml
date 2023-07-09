@@ -1,0 +1,201 @@
+---
+# TODO make everything a role or find a source which provide cross platfrom (esp alpine and windows) roles
+# TODO copy config file from github yadm/chezmoi/dotdrop/...
+- hosts: localhost
+  # NOTE: connection local sped up by 6 secs 23s -> 17s
+  connection: local
+  gather_facts: true
+  # NOTE: gathering only required facts for now (env vars)
+  # https://stackoverflow.com/questions/71692791/is-it-possible-to-gather-only-specific-facts-in-ansible
+  gather_subset:
+    - "env"
+    - "!all"
+    - "!min"
+  # vars:
+    # path_go_bin: "{{lookup('env', 'PATH')}}:~/go/bin"
+  name: setup machine
+  tasks:
+    - name: setting up local alpine machine
+      block:
+      - name: setting up go, gup and packages
+        block:
+        - name: install go
+          community.general.apk:
+            name: go
+            state: latest
+          tags: [go]
+        # TODO write a gup role/collection
+        - name: check if gup is installed
+          ansible.builtin.shell: |
+            command -v gup
+          environment:
+            PATH: "{{ ansible_env.HOME }}/go/bin:{{ ansible_env.PATH }}"
+          register: gup_exists
+          ignore_errors: true
+          changed_when: false
+          tags: [go]
+        - name: install gup
+          when: gup_exists is failed
+          ansible.builtin.shell: echo $PATH; go install -v -ldflags="-s -w" github.com/nao1215/gup@latest
+          tags: [go]
+        - name: check if gup config exists
+          stat:
+            path: ~/.config/gup/gup.conf
+          register: stat_result
+        - name: gup config found install gup (go) tools
+          ansible.builtin.shell: gup import
+          when: stat_result.stat.exists
+          tags: [go]
+        - name: gup config not found fallback to manual install
+          when: not stat_result.stat.exists
+          tags: [go]
+          # cross platform packages
+          ansible.builtin.shell: |
+            go install -ldflags="-s -w" github.com/dundee/gdu/v5/cmd/gdu@latest
+            go install -ldflags="-s -w" github.com/distatus/battery/cmd/battery@latest
+            go install -ldflags="-s -w" github.com/muesli/duf@latest
+            go install -ldflags="-s -w" github.com/schollz/croc/v9@latest
+          #creates: ~/.config/gup/gup.conf
+          # windows only
+          # github.com/stochmal/checkpath-go
+        - name: add gobin to path bashrc
+          ansible.builtin.blockinfile:
+            dest: ~/.bashrc
+            marker: "# {mark} ansible managed gobin"
+            block: |
+                export GOBIN=~/go/bin
+                export PATH=$PATH:$GOBIN
+          tags: [go]
+      - name: setting up rust toolchain and rust packages
+        block:
+        - name: check if cargo is installed
+          ansible.builtin.shell: |
+            command -v cargo
+          register: cargo_exists
+          ignore_errors: true
+          changed_when: false
+          tags: [rust]
+        - name: install build-base, rustup, sccache
+          when: cargo_exists is failed
+          # NOTE: ansible.builtin.package resolves to this and as of now I am only using alpine and nothing else
+          # so to kind of speed it up I added this directly.
+          # TODO move back to ansible.builtin.package once I write roles for win/linux (using scoop/choco based on windows host os condition)
+          # linux should work with ansible.builtin.package no need for detection i.e. pacman/apk/apt etc.
+          community.general.apk:
+            name: build-base,rustup,sccache
+            state: present
+          tags: [rust]
+        - name: install rustup toolchain
+          when: cargo_exists is failed
+          ansible.builtin.shell: |
+            rustup-init -y --profile minimal
+            source ~/.cargo/env
+            rustup default stable
+          args:
+            creates: ~/.cargo/bin/cargo
+          tags: [rust]
+        - name: create cargo config file
+          copy:
+            content: ""
+            dest: ~/.cargo/config.toml
+            force: false
+          tags: [rust]
+        - name: configure cargo to use sccache
+          ansible.builtin.blockinfile:
+            path: ~/.cargo/config.toml
+            marker: "# {mark} ansible managed cargo config"
+            block: |
+              [build]
+              rustc-wrapper = "sccache"
+          tags: [rust]
+        # TODO: if possible detect if cargo-update is not latest and then and only then
+        #       install these and else ignore
+        - name: build dependecies for cargo-update
+          community.general.apk:
+            name: pkgconf,openssl-dev
+            state: latest
+          tags: [rust]
+        # navi not in alpine 3.17.4 repos, it is in 3.18 and edge
+        # TODO: log to file and tail -f it to see realtime progress
+        - name: install cargo tools
+          community.general.cargo:
+            name: topgrade,cargo-update,navi
+            state: latest
+          tags: [rust]
+        environment:
+          PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+      - name: setting up dev environment
+        block:
+          - name: setting up prompt
+            block:
+            # TODO: chsh to fish with shadow
+            # TODO: have a minimal-wsl playbook which only installs ansible and nothing else
+            # NOTE: apk add fish is auto installing navi, lf, fzf fish plugins via apk trigger
+            - name: fish, zoxide, starship
+              community.general.apk:
+                name: fish,zoxide,starship
+                state: latest
+              tags: [dev]
+          - name: install lf, fish, fzf, micro, nvim
+            community.general.apk:
+              name: lf,fish,fzf,micro,neovim
+              state: latest
+            tags: [dev]
+          # lf setup
+          - name: make sure lf config dir exists
+            file:
+              path: ~/.config/lf
+              state: directory
+            tags: [dev, config]
+          - name: create lf config file
+            copy:
+              content: ""
+              dest: ~/.config/lf/lfrc
+              force: false
+            tags: [dev, config]
+          - name: configure lf
+            ansible.builtin.blockinfile:
+              path: ~/.config/lf/lfrc
+              marker: "# {mark} ansible managed lfrc"
+              block: |
+                  set hidden!
+            tags: [dev, config]
+          - name: get navi config path
+            changed_when: false
+            ansible.builtin.shell: navi info config-path
+            register: navi_config_dir
+            tags: [rust, dev, config]
+          - name: get navi example config
+            changed_when: false
+            ansible.builtin.shell: navi info config-example
+            register: navi_config_example
+            tags: [rust, dev, config]
+          # NOTE: https://github.com/denisidoro/navi/blob/master/docs/config_file.md
+          # navi setup (default config comes with skim, zsh, overwrite it with the example one which is fzf, bash)
+          - name: make sure navi config dir exists
+            file:
+              path: "{{ navi_config_dir.stdout | dirname }}"
+              state: directory
+            tags: [rust, dev, config]
+          - name: create navi config file
+            copy:
+              content: ""
+              dest: "{{ navi_config_dir.stdout }}"
+              force: false
+            tags: [rust, dev, config]
+          - name: configure navi
+            ansible.builtin.blockinfile:
+              marker: "# {mark} ansible managed navi config"
+              path: "{{ navi_config_dir.stdout }}"
+              block: "{{ navi_config_example.stdout }}"
+            tags: [rust, dev, config]
+          - name: configure navi widget
+            ansible.builtin.blockinfile:
+              path: ~/.bashrc
+              marker: "# {mark} ansible managed navi widget"
+              block: |
+                  navi widget bash > /tmp/navi_widget.sh
+                  source /tmp/navi_widget.sh
+            tags: [rust, dev, config]
+        environment:
+          PATH: "{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.HOME }}/go/bin:{{ ansible_env.PATH }}"

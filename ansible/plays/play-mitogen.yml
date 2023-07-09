@@ -1,0 +1,19 @@
+---
+# TODO mitogen works properly only with ansible core 2.12.x
+# if `become` feature can be ignored it works with 2.13.x but not with 2.14.x 
+# which is the latest ansible-core ver as of now 10/7/2023
+# strategy: mitogen_linear
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  strategy: linear
+  name: setup mitogen and requirements
+  tasks:
+    - name: setting up python, pip on target machine
+      community.general.apk:
+        name: python3,py3-pip
+        state: latest
+    - name: setting up mitogen
+      ansible.builtin.pip:
+        name: mitogen
+        state: latest
