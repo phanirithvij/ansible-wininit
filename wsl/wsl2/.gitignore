@@ -2,3 +2,5 @@ Alpine.exe
 Alpine.zip
 rootfs.tar.gz
 *.vhdx
+temp/
+tmp/
