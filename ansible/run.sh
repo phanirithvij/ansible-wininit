@@ -5,5 +5,4 @@ set -x
 ANSIBLE_CONFIG=/etc/ansible/ansible.cfg \
 ansible-playbook \
     -i inventory.ini \
-    -v \
-    playbook.yml
+    local-playbook.yml $@

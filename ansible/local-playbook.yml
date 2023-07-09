@@ -14,7 +14,7 @@
       - name: setting up go, gup and packages
         block:
         - name: install go
-          ansible.builtin.package:
+          community.general.apk:
             name: go
             state: latest
           tags:
@@ -54,7 +54,7 @@
       - name: setting up dev environment
         block:
         - name: install lf, micro, nvim
-          ansible.builtin.package:
+          community.general.apk:
             name: lf,micro,neovim
             state: latest
           tags:
@@ -70,8 +70,8 @@
             - rust
         - name: install build-base, rustup, sccache
           when: cargo_exists is failed
-          ansible.builtin.package:
-          # community.general.apk:
+          # ansible.builtin.package:
+          community.general.apk:
             name: build-base,rustup,sccache
             state: present
           tags:
