@@ -1,0 +1,238 @@
+    1  ls
+    2  lf
+    3  ./run.sh 
+    4  apk add micro
+    5  apk del micro
+    6  ./run.sh 
+    7  ./run.sh 
+    8  lf
+    9  EDITOR=micro lf
+   10  EDITOR=micro lf
+   11  ./run.sh -v
+   12  time l./run.sh
+   13  time ./run.sh
+   14  time ./run.sh -v
+   15  time ./run.sh -vv
+   16  time ./run.sh -vvv
+   17  lf
+   18  EDITOR=micro lf
+   19  EDITOR=micro lf
+   20  time ./run.sh -vvv
+   21  time ./run.sh -v
+   22  time ./run.sh
+   23  clear
+   24  reset
+   25  { time ls > /dev/null 2>&1 ; } 2> out.txt
+   26  cat out.txt 
+   27  rm out.txt 
+   28  time ./run.sh > /dev/null 2>&1
+   29  ANSIBLE_DISPLAY_SKIPPED_HOSTS=no ANSIBLE_DISPLAY_OK_HOSTS=no ./run.sh 
+   30  time ANSIBLE_DISPLAY_SKIPPED_HOSTS=no ANSIBLE_DISPLAY_OK_HOSTS=no ./run.sh 
+   31  which cargo
+   32  which gup
+   33  ls ~/go/bin
+   34  echo ~/.bashrc
+   35  cat ~/.bashrc
+   36  cat ~/.profile
+   37  EDITOR=micro lf
+   38  which vagrant
+   39  which vagrant.exe
+   40  cd ../vagrant/
+   41  vagrant.exe init
+   42  lf
+   43  lf
+   44  vagrant.exe provision
+   45  vagrant.exe up
+   46  apk add vagrant
+   47  pwd
+   48  cd
+   49  wget -q https://releases.hashicorp.com/vagrant/2.3.7/vagrant_2.3.7_linux_amd64.zip
+   50  pwd
+   51  tar xf vagrant_2.3.7_linux_amd64.zip 
+   52  unzip vagrant_2.3.7_linux_amd64.zip 
+   53  ls
+   54  rm vagrant_2.3.7_linux_amd64.zip 
+   55  file vagrant 
+   56  apk add upx
+   57  upx --ultra-brute --strip-relocs=0 vagrant 
+   58  ls -lh
+   59  upx --ultra-brute --strip-relocs=0 vagrant 
+   60  upx --ultra-brute --strip-relocs=0 vagrant 
+   61  cp vagrant /mnt/c/Users/Rithvij/go/bin/vagrant_linux_binary
+   62  mv vagrant /mnt/c/Users/Rithvij/go/bin/vagrant_linux_binary
+   63  cd /mnt/c/Users/Rithvij/go/bin
+   64  upx --ultra-brute --strip-relocs=0 vagrant_linux_binary 
+   65  ssh ra5P8lgrPyy5qM8O3KFw:MDZjZjdiZjEudm0udXB0ZXJtLmludGVybmFsOjIyMjI=@uptermd.upterm.dev
+   66  ps aux
+   67  ps aux -t
+   68  ps -t
+   69  ps -T
+   70  ps
+   71  ps -T
+   72  ps
+   73  ll
+   74  ll
+   75  lf
+   76  p
+   77  ps
+   78  killall topgrade
+   79  ls
+   80  ls -la
+   81  which vagrant
+   82  cd
+   83  ls
+   84  file vagrant.000 
+   85  ls -la
+   86  ls -lh
+   87  rm vagrant.*
+   88  ls
+   89  wget https://releases.hashicorp.com/vagrant/2.3.7/vagrant_2.3.7_linux_amd64.zip
+   90  unzip vagrant_2.3.7_linux_amd64.zip 
+   91  rm vagrant_2.3.7_linux_amd64.zip 
+   92  ls -lh
+   93  ls -l
+   94  ls -lS
+   95  ll
+   96  ls -la
+   97  apk add starship
+   98  starship
+   99  starship prompt
+  100  starship init
+  101  starship init bash
+  102  source $(starship init bash)
+  103  eval $(starship init bash)
+  104  . $(starship init bash)
+  105  cat $(starship init bash)
+  106  echo $SHELL
+  107  echo $0
+  108  cat $(starship init bash)
+  109  echo $(starship init bash)
+  110  source $(starship init bash)
+  111  fish
+  112  apk add fish
+  113  fish
+  114  starship init bash | source
+  115  starship init bash
+  116  starship init bash --print-full-init
+  117  starship time
+  118  starship init bash
+  119  source $(starship init bash)
+  120  eval "$(starship init bash)"
+  121  ls
+  122  ls
+  123  fish
+  124  lf
+  125  cd -
+  126  lf
+  127  apk add topgrade
+  128  lf
+  129  which vi
+  130  which vim
+  131  apk add neovim
+  132  which vim
+  133  vim
+  134  nvim
+  135  EDITOR=nvim lf
+  136  cd ../ansible
+  137  ./run.sh 
+  138  which topgrade
+  139  topgrade --skip-notify --no-retry
+  140  topgrade --skip-notify --no-retry
+  141  topgrade --skip-notify --no-retry --x
+  142  topgrade --skip-notify --no-retry --help
+  143  topgrade --skip-notify --no-retry --disable system
+  144  ./run.sh -vvv
+  145  /root/.cargo/bin/cargo install cargo-update
+  146  apk add pkgconfig
+  147  /root/.cargo/bin/cargo install cargo-update
+  148  apk add openssl
+  149  /root/.cargo/bin/cargo install cargo-update
+  150  apk del openssl
+  151  apk add openssl-dev
+  152  /root/.cargo/bin/cargo install cargo-update
+  153  apk add pkgconf openssl-dev
+  154  apk del pkgconf openssl-dev
+  155  apk del pkgconfig openssl-dev
+  156  apk add pkgconf openssl-dev
+  157  /root/.cargo/bin/cargo install cargo-update
+  158  lf
+  159  ./run.sh -v
+  160  lf
+  161  ./run.sh -v
+  162  lf
+  163  ./run.sh
+  164  lf
+  165  time ANSIBLE_DISPLAY_SKIPPED_HOSTS=no ANSIBLE_DISPLAY_OK_HOSTS=no ./run.sh 2>&1
+  166  time ANSIBLE_DISPLAY_SKIPPED_HOSTS=no ANSIBLE_DISPLAY_OK_HOSTS=no ./run.sh > /dev/null 2>&1
+  167  apk add hyperfine
+  168  hyperfine
+  169  hyperfine ANSIBLE_DISPLAY_SKIPPED_HOSTS=no ANSIBLE_DISPLAY_OK_HOSTS=no ./run.sh > /dev/null 2>&1
+  170  hyperfine ./run.sh 
+  171  lf
+  172  cat /etc/ansible/ansible.cfg 
+  173  micro /etc/ansible/ansible.cfg 
+  174  time ANSIBLE_DISPLAY_SKIPPED_HOSTS=no ANSIBLE_DISPLAY_OK_HOSTS=no ./run.sh
+  175  ls
+  176  lf
+  177  cat /etc/ansible/ansible.cfg 
+  178  cp /etc/ansible/ansible.cfg ansible.cfg.profile
+  179  cp /etc/ansible/ansible.cfg ansible.cfg
+  180  lf
+  181  lazygit.exe
+  182  t a
+  183  tmux a
+  184  ANSIBLE_CALLBACK_PLUGINS="$(python3 -m ara.setup.callback_plugins)"
+  185  ANSIBLE_CALLBACK_PLUGINS="$(python3 -m ara.setup.callback_plugins)" ./run.sh 
+  186  ANSIBLE_CALLBACK_PLUGINS="$(python3 -m ara.setup.callback_plugins)" ./run.sh -vv
+  187  gup remove gdu
+  188  ls ~/go/bin
+  189  lf
+  190  curl -L https://networkgenomics.com/try/mitogen-0.2.9.tar.gz
+  191  apk add curl
+  192  curl -L https://networkgenomics.com/try/mitogen-0.2.9.tar.gz
+  193  curl -vL https://networkgenomics.com/try/mitogen-0.2.9.tar.gz
+  194  pip install mitogen
+  195  which mitogen
+  196  python3
+  197  lf /usr/lib/python3.11/site-packages/mitogen/__init__.py
+  198  lf /usr/lib/python3.11/site-packages/mitogen/
+  199  lf /usr/lib/python3.11/site-packages/ansible_mitogen/plugins/strategy/
+  200  pip show ansible_mitogen
+  201  pip show mitogen
+  202  python -m ansible_mitogen --user-site
+  203  python -m mitogen --user-site
+  204  python -c "import setuptools as _; print(_.__path__)"
+  205  python -c "import ansible_mitogen as _; print(_.__path__)"
+  206  python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"
+  207  python -c "import ansible_mitogen as _; print(_.__path__[0[)"
+  208  python -c "import ansible_mitogen as _; print(_.__path__[0])"
+  209  python -c "import ansible_mitogenx as _; print(_.__path__[0])"
+  210  python -c "import ansible_mitogen as _; print(_.__path__[0])"
+  211  lf
+  212  python -c "import ansible_mitogen as _; print(_.__path__[0])"
+  213  lf
+  214  ANSIBLE_CONFIG=ansible.cfg.mitogen ./run.sh 
+  215  lf
+  216  ANSIBLE_CONFIG=ansible.cfg.mitogen ./run.sh 
+  217  ANSIBLE_CONFIG=./ansible.cfg.mitogen ./run.sh 
+  218  lf
+  219  ANSIBLE_CONFIG=./ansible.cfg.mitogen ./run.sh 
+  220  lf
+  221  ANSIBLE_CONFIG=./ansible.mitogen.cfg ./run.sh 
+  222  apk del ansible
+  223  apk add ansible=2.13.6-r0 --repository=http://dl-cdn.alpinelinux.org/alpine/v3.17/main
+  224  apk add ansible=2.13.6-r0 --repository=http://dl-cdn.alpinelinux.org/alpine/v3.17/community
+  225  apk add ansible=2.13.6-r0 ansible=6.6.0-r0 --repository=http://dl-cdn.alpinelinux.org/alpine/v3.17/community
+  226  apk del ansible
+  227  apk del ansible
+  228  apk del ansible-core
+  229  apk add ansible=6.6.0-r0 --repository=http://dl-cdn.alpinelinux.org/alpine/v3.17/community
+  230  apk del ansible-core
+  231  apk del ansible
+  232  apk add ansible-core=2.13.6-r0 ansible=6.6.0-r0 --repository=http://dl-cdn.alpinelinux.org/alpine/v3.17/community
+  233  ANSIBLE_CONFIG=./ansible.mitogen.cfg ./run.sh 
+  234  ansible-galaxy collection install community
+  235  ansible-galaxy collection install community.general
+  236  ANSIBLE_CONFIG=./ansible.mitogen.cfg ./run.sh 
+  237  lf
+  238  history > ../wsl/wsl2/docs/alpine_bash_hist_2_ansible_ara_etc.txt 

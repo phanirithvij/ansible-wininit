@@ -32,22 +32,17 @@ EOF
 #apk add python3 py3-pip
 #pip install pipx
 #pipx install --system-site-packages --include-deps ansible
+# TODO temp downgrade for mitogen
 apk add ansible
+# apk add ansible-core=2.13.6-r0 ansible=6.6.0-r0 --repository=http://dl-cdn.alpinelinux.org/alpine/v3.17/community
 echo $(which ansible) --version
 $(which ansible) --version
 mkdir -p /etc/ansible
-cat > /etc/ansible/ansible.cfg << EOF
-[defaults]
-# Use the YAML callback plugin.
-stdout_callback = yaml
-# Use the stdout_callback when running ad-hoc commands.
-bin_ansible_callbacks = True
-log_path = ~/.cache/ansible-playbook.log
-# https://stackoverflow.com/a/68496361
-[ssh_connection]
-pipelining = True
-ssh_args = -o ControlMaster=auto -o ControlPersist=1200
-EOF
+cp ../../ansible/ansible.cfg /etc/ansible/ansible.cfg
+ansible-galaxy collection install community.general
+apk add py3-pip
+pip install mitogen
+apk del py3-pip
 
 # setup ssh
 apk add openssh tmux py3-pip

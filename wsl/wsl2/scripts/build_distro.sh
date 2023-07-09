@@ -4,7 +4,8 @@ apk add make curl libarchive-tools sudo git
 
 git clone https://github.com/yuk7/AlpineWSL
 
-patchver="3.18.2"
+patchver="3.17.4"
+# patchver="3.18.2"
 
 cd AlpineWSL
 git apply ../alpine-$patchver.patch

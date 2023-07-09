@@ -46,7 +46,8 @@ if ($isAdmin) {
 # get the alpine linux from outside microsoft store
 
 if (-Not (Test-Path "Alpine.zip")) {
-    irm "https://github.com/phanirithvij/ansible-wininit/releases/download/v0.0.1-alpha/Alpine.zip" -OutFile Alpine.zip
+    # irm "https://github.com/phanirithvij/ansible-wininit/releases/download/v0.0.1-alpha/Alpine.zip" -OutFile Alpine.zip
+    irm "https://github.com/phanirithvij/ansible-wininit/releases/download/v0.0.1-alpha.1/Alpine.zip" -OutFile Alpine.zip
     Expand-Archive Alpine.zip
     if (-Not (Test-Path "Alpine.exe")) {
         mv Alpine\Alpine.exe .

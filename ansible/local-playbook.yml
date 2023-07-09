@@ -1,5 +1,19 @@
 ---
 - hosts: localhost
+  connection: local
+  gather_facts: false
+  strategy: linear
+  tasks:
+    - name: setting up python on target machine
+      community.general.apk:
+        name: python3,py3-pip
+        state: latest
+
+- hosts: localhost
+  strategy: mitogen_linear
+  # sped up by 6 secs 23s -> 17s
+  # TODO mitogen
+  connection: local
   gather_facts: true
   # https://stackoverflow.com/questions/71692791/is-it-possible-to-gather-only-specific-facts-in-ansible
   gather_subset:
@@ -11,14 +25,19 @@
   tasks:
     - name: setting up local alpine machine
       block:
+      - name: setting up prompt
+        block:
+        - name: fish, zoxide, starship
+          community.general.apk:
+            name: fish,zoxide,starship
+            state: latest
       - name: setting up go, gup and packages
         block:
         - name: install go
           community.general.apk:
             name: go
             state: latest
-          tags:
-            - go
+          tags: [go]
         - name: check if gup is installed
           ansible.builtin.shell: command -v gup
           environment:
@@ -26,13 +45,11 @@
           register: gup_exists
           ignore_errors: true
           changed_when: false
-          tags:
-            - go
+          tags: [go]
         - name: install gup
           when: gup_exists is failed
           ansible.builtin.shell: go install -v -ldflags="-s -w" github.com/nao1215/gup@latest
-          tags:
-            - go
+          tags: [go]
         - name: check if gup config exists
           stat:
             path: ~/.config/gup/gup.conf
@@ -40,8 +57,10 @@
         - name: gup config found install gup (go) tools
           ansible.builtin.shell: gup import
           when: stat_result.stat.exists
+          tags: [go]
         - name: gup config not found fallback to manual install
           when: not stat_result.stat.exists
+          tags: [go]
           # cross platform packages
           ansible.builtin.shell: |
             go install -ldflags="-s -w" github.com/dundee/gdu/v5/cmd/gdu@latest
@@ -51,14 +70,20 @@
           #creates: ~/.config/gup/gup.conf
           # windows only
           # github.com/stochmal/checkpath-go
+        - name: add gobin to path bashrc
+          blockinfile:
+            dest: ~/.bashrc
+            block: |
+                export GOBIN=~/go/bin
+                export PATH=$PATH:$GOBIN
+          tags: [go]
       - name: setting up dev environment
         block:
         - name: install lf, micro, nvim
           community.general.apk:
             name: lf,micro,neovim
             state: latest
-          tags:
-            - dev
+          tags: [dev]
       - name: setting up rust toolchain and rust packages
         block:
         - name: check if cargo is installed
@@ -66,16 +91,14 @@
           register: cargo_exists
           ignore_errors: true
           changed_when: false
-          tags:
-            - rust
+          tags: [rust]
         - name: install build-base, rustup, sccache
           when: cargo_exists is failed
           # ansible.builtin.package:
           community.general.apk:
             name: build-base,rustup,sccache
             state: present
-          tags:
-            - rust
+          tags: [rust]
         - name: install rustup toolchain
           when: cargo_exists is failed
           ansible.builtin.shell: |
@@ -84,27 +107,35 @@
             rustup default stable
           args:
             creates: ~/.cargo/bin/cargo
-          tags:
-            - rust
+          tags: [rust]
         - name: create a symbolic link for cargo in /usr/local/bin
           ansible.builtin.file:
             src: ~/.cargo/bin/cargo
             dest: /usr/local/bin/cargo
             state: link
+          tags: [rust]
         - name: create cargo config file
           copy:
             content: ""
             dest: ~/.cargo/config.toml
             force: false
+          tags: [rust]
         - name: configure cargo to use sccache
           ansible.builtin.blockinfile:
             path: ~/.cargo/config.toml
             block: |
               [build]
               rustc-wrapper = "sccache"
+          tags: [rust]
+        # if possible detect if cargo-update is not latest and then and only then
+        # install these and else ignore
+        - name: build dependecies for cargo-update
+          community.general.apk:
+            name: pkgconf,openssl-dev
+            state: latest
+          tags: [rust]
         - name: install cargo tools
           community.general.cargo:
-            name: zoxide
+            name: topgrade,cargo-update
             state: latest
-          tags:
-            - rust
+          tags: [rust]
