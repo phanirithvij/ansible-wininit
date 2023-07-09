@@ -1,0 +1,19 @@
+name: upx-upterm
+
+on:
+  workflow_dispatch:
+
+jobs:
+  upx:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install UPX
+        uses: crazy-max/ghaction-upx@v2
+        with:
+          install-only: true
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+      - name: Next step
+        run: echo bye!
