@@ -1,0 +1,26 @@
+- name: check and install python
+  hosts: all
+  gather_facts: false
+  pre_tasks:
+    - name: check if python is installed
+      ansible.builtin.raw: python --version
+      register: python_check
+      changed_when: false
+      failed_when: false
+    - name: copy python install script to host
+      local_action: |
+        ansible.builtin.shell
+        cat {{playbook_dir}}/scripts/install_py.sh \
+            | sshpass -p {{ansible_pass}} \
+              ssh {{ansible_user}}@{{inventory_hostname}} -p {{ansible_port}} \
+              'mkdir -p ~/.ansible; cat > ~/.ansible/install_py.sh'
+      args:
+        executable: /bin/bash
+      when: python_check.rc != 0
+    - name: install python
+      ansible.builtin.raw: bash ~/.ansible/install_py.sh > /dev/null
+      when: python_check.rc != 0
+  tasks:
+    - name: check python ver
+      ansible.builtin.command: python --version
+      changed_when: false

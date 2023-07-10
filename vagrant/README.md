@@ -11,6 +11,13 @@ Also vagrant, msys2, wsl etc don't exist in termux so might need to have a termu
 
 ## TODO
 
+- [ ] replicate wsl2 alpine box setup
+- [ ] airgap and eliminate all dependecies
+	- apk
+	- pypi
+	- vagrant
+		- boxes
+	- ansible galaxy collections
 - [ ] init.ps1
 	- [ ] scoop installation
 	- [ ] scoop install vagrant

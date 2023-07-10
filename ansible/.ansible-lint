@@ -1,2 +1,4 @@
+# BEGIN ANSIBLE MANAGED BLOCK
 skip_list:
     - "name[casing]"
+# END ANSIBLE MANAGED BLOCK
