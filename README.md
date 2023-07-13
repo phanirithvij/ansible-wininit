@@ -23,10 +23,10 @@ Bootstrap ansible on windows
 ## Notes
 
 - shell history on ubuntu wsl
-    7  apt install openssh-server
-   10  mkdir /run/sshd
-   11  sshd -r
-   16  apt install net-tools
-   17  netstat -tuplen
+   -  7  apt install openssh-server
+   - 10  mkdir /run/sshd
+   - 11  sshd -r
+   - 16  apt install net-tools
+   - 17  netstat -tuplen
 
 ### Frequently used Commands
