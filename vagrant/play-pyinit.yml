@@ -8,6 +8,7 @@
       changed_when: false
       failed_when: false
     - name: copy python install script to host
+      when: python_check.rc != 0
       local_action: |
         ansible.builtin.shell
         cat {{playbook_dir}}/scripts/install_py.sh \
@@ -16,11 +17,10 @@
               'mkdir -p ~/.ansible; cat > ~/.ansible/install_py.sh'
       args:
         executable: /bin/bash
-      when: python_check.rc != 0
     - name: install python
-      ansible.builtin.raw: bash ~/.ansible/install_py.sh > /dev/null
       when: python_check.rc != 0
+      ansible.builtin.raw: bash ~/.ansible/install_py.sh > /dev/null
   tasks:
     - name: check python ver
-      ansible.builtin.command: python --version
+      ansible.builtin.command: python -V
       changed_when: false
