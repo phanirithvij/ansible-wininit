@@ -1,0 +1,54 @@
+#!/usr/bin/env ansible-playbook
+# https://wiki.termux.com/wiki/Switching_package_manager
+- hosts: all
+  # connection: local
+  gather_facts: true
+  gather_subset:
+    - "env"
+    - "!all"
+    - "!min"
+  name: switch to pacman package manager
+  vars:
+    prefix_dir: "{{ ansible_env.PREFIX }}"
+    root_dir: "{{ prefix_dir | dirname }}"
+    dest_dir: "{{ root_dir }}/usr-pacman"
+    apt_dir: "{{ root_dir }}/usr-apt"
+    backup_dir: "{{ root_dir }}/usr-backup"
+  tasks:
+    - name: mkdir $PREFIX/usr-pacman
+      ansible.builtin.file:
+        path: "{{ dest_dir }}"
+        state: directory
+    - name: download and unzip pacman bootstrap package
+      ansible.builtin.unarchive:
+        src: "https://github.com/termux-pacman/termux-packages/releases/latest/download/bootstrap-aarch64.zip"
+        dest: "{{ dest_dir }}"
+        remote_src: yes
+    - name: create symlinks
+      ansible.builtin.shell: |
+        cat SYMLINKS.txt | awk -F "←" '{system("ln -s '"'"'"$1"'"'"' '"'"'"$2"'"'"'")}'
+        touch .pacman-done
+      args:
+        chdir: "{{ dest_dir }}"
+        creates: "{{ dest_dir }}/.pacman-done"
+    - name: backup old usr directory
+      # Use system bin tools as usr is getting moved
+      # https://wiki.termux.com/wiki/Recover_a_broken_environment
+      # /system/bin/ln -s usr-pacman {{ prefix_dir }}
+      # symlinking gave pacman errors so moving instead
+      ansible.builtin.shell: |
+        mv {{ prefix_dir }} {{ backup_dir }}
+        /system/bin/mv {{ dest_dir }} {{ prefix_dir }}
+      args:
+        chdir: "{{ root_dir }}"
+    - name: run pacman-key commands
+      ansible.builtin.raw: |
+        pacman-key --init
+        pacman-key --populate
+        pacman -Sy
+      # args:
+        # creates: "{{ prefix_dir }}/etc/pacman.d/gnupg"
+    - name: install python in new environment
+      ansible.builtin.raw: |
+        pacman -S --needed --noconfirm python python-pip
+        # pip install pipx
