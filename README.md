@@ -1,3 +1,7 @@
+# ARCHIVE
+
+Hope there doesn't come a time when I have to manage a fleet of windows machines, if I find myself in that hell, here is some rope to hold on to. But I hope by then I can use nix on windows.
+
 ## Intro
 
 
